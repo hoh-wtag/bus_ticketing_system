@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    enum role:  { user: 0, admin: 1 }
+    enum role:  { customer: 0, admin: 1 }
     validates :email, :user_name, :encrypted_password, :phone, :role, presence: true
     validates :first_name, :last_name, presence: true, format:{with: /\A[A-Za-z]+\z/}
     validates :email, :user_name, uniqueness: { case_sensitive: false }
