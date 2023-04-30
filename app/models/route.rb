@@ -1,5 +1,5 @@
 class Route < ApplicationRecord
-    validates :route_source, :route_destination, presence: true, format: { with: /\A[A-Za-z]+\z/ }
+    validates :route_source, :route_destination, presence: true, format: { with: /\A[A-Za-z\s]+\z/ }
     attr_accessor :route_name
 
     after_initialize :getRouteName
