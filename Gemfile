@@ -77,3 +77,6 @@ end
 
 gem 'faker'
 gem 'phony_rails'
+gem 'rubocop'
+gem 'rubocop-rails'
+gem 'htmlbeautifier'
