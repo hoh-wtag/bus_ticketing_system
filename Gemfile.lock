@@ -134,6 +134,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
+    ordinare (0.4.0)
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)
@@ -245,6 +246,7 @@ DEPENDENCIES
   htmlbeautifier
   importmap-rails
   jbuilder
+  ordinare
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)

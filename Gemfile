@@ -72,6 +72,7 @@ group :test do
   gem "webdrivers"
 end
 
+gem 'htmlbeautifier'
+gem 'ordinare'
 gem 'rubocop'
 gem 'rubocop-rails'
-gem 'htmlbeautifier'
