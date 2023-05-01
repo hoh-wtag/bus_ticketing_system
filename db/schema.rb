@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_083730) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_043649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_083730) do
   create_table "routes", force: :cascade do |t|
     t.string "route_source", null: false
     t.string "route_destination", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.integer "ticket_price", null: false
+    t.integer "total_booked", null: false
+    t.date "trip_date", null: false
+    t.time "trip_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
