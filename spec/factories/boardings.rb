@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :boarding do
-    boarding_time { "2023-05-01 12:40:53" }
+    boarding_time { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default) }
   end
 end
