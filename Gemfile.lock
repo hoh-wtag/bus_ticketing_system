@@ -274,6 +274,9 @@ DEPENDENCIES
   capybara
   debug
   dotenv-rails
+  factory_bot_rails
+  faker
+  htmlbeautifier
   importmap-rails
   jbuilder
   ordinare
@@ -281,6 +284,9 @@ DEPENDENCIES
   phony_rails
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rspec-rails
+  rubocop
+  rubocop-rails
   selenium-webdriver
   shoulda-matchers (~> 5.0)
   sprockets-rails
