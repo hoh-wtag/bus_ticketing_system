@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_090514) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_090514) do
     t.time "boarding_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "trip_id"
+    t.bigint "boarding_point_id"
+    t.index ["boarding_point_id"], name: "index_boardings_on_boarding_point_id"
+    t.index ["trip_id"], name: "index_boardings_on_trip_id"
   end
 
   create_table "buses", force: :cascade do |t|
@@ -53,12 +57,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_090514) do
     t.integer "seat_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ticket_id"
+    t.bigint "bus_id"
+    t.index ["bus_id"], name: "index_seats_on_bus_id"
+    t.index ["ticket_id"], name: "index_seats_on_ticket_id"
   end
 
   create_table "tickets", force: :cascade do |t|
     t.integer "total_fare", null: false
+    t.bigint "user_id"
+    t.bigint "payment_id"
+    t.bigint "trip_id"
+    t.bigint "boarding_id"
+    t.bigint "bus_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["boarding_id"], name: "index_tickets_on_boarding_id"
+    t.index ["bus_id"], name: "index_tickets_on_bus_id"
+    t.index ["payment_id"], name: "index_tickets_on_payment_id"
+    t.index ["trip_id"], name: "index_tickets_on_trip_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -66,8 +84,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_090514) do
     t.integer "total_booked", null: false
     t.date "trip_date", null: false
     t.time "trip_time", null: false
+    t.bigint "bus_id"
+    t.bigint "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bus_id"], name: "index_trips_on_bus_id"
+    t.index ["route_id"], name: "index_trips_on_route_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +106,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_090514) do
     t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 
+  add_foreign_key "boardings", "boarding_points"
+  add_foreign_key "boardings", "trips"
+  add_foreign_key "seats", "buses"
+  add_foreign_key "seats", "tickets"
+  add_foreign_key "tickets", "boardings"
+  add_foreign_key "tickets", "buses"
+  add_foreign_key "tickets", "payments"
+  add_foreign_key "tickets", "trips"
+  add_foreign_key "tickets", "users"
+  add_foreign_key "trips", "buses"
+  add_foreign_key "trips", "routes"
 end

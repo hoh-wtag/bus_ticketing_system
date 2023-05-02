@@ -6,6 +6,9 @@ class CreateTrips < ActiveRecord::Migration[7.0]
       t.date :trip_date, null:false
       t.time :trip_time, null:false
 
+      t.references :bus, null: true, foreign_key: true
+      t.references :route, null: true, foreign_key: true
+
       t.timestamps
     end
   end

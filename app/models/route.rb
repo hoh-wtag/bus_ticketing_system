@@ -1,10 +1,12 @@
 class Route < ApplicationRecord
-    validates :route_source, :route_destination, presence: true, format: { with: /\A[A-Za-z\s]+\z/ }
-    attr_accessor :route_name
+  has_many :trips, dependent: :nullify
 
-    after_initialize :getRouteName
+  validates :route_source, :route_destination, presence: true, format: { with: /\A[A-Za-z\s]+\z/ }
+  attr_accessor :route_name
 
-    def getRouteName
-      self.route_name = route_source.to_s + '-' + route_destination.to_s
-    end
+  after_initialize :full_route_name
+
+  def full_route_name
+    self.route_name = "#{route_source} - #{route_destination}"
+  end
 end
