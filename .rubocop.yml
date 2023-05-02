@@ -64,3 +64,8 @@ Lint/UnusedMethodArgument:
 
 Rails/HasAndBelongsToMany:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - db/schema.rb
+  Max: 100

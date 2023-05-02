@@ -16,10 +16,10 @@ Ticket.destroy_all
 Seat.destroy_all
 route = Route.create(route_source: "Dhaka", route_destination: "Chattogram")
 bus = Bus.create(bus_code: "Shohagh_001", bus_type: 0, bus_company: "Shohagh", bus_capacity: 48)
-user = User.create( first_name: "Hasib", last_name: "Chowdhury", email: "hasib@gmail.com", user_name: "hasib", encrypted_password: "qwerzxcv", phone: "+8801758880059", role: 0)
+user = User.create(first_name: "Hasib", last_name: "Chowdhury", email: "hasib@gmail.com", user_name: "hasib", encrypted_password: "qwerzxcv", phone: "+8801758880059", role: 0)
 payment = Payment.create
-trip = Trip.create(ticket_price: 800, total_booked: 0, trip_date: "01-05-2023", trip_time: "13:00", bus: bus, route: route)
+trip = Trip.create(ticket_price: 800, total_booked: 0, trip_date: "01-05-2023", trip_time: "13:00", bus_id: bus.id, route_id: route.id)
 boarding_point = BoardingPoint.create(boarding_point_name: "Rajarbagh")
-boarding = Boarding.create(boarding_time: "13:00", boarding_point: boarding_point, trip: trip)
-ticket = Ticket.create(total_fare: 800, user: user, payment: payment, trip: trip, bus: bus, boarding: boarding)
-seat = Seat.create(seat_code: "A1", seat_status: 0, bus: bus, ticket: ticket)
+boarding = Boarding.create(boarding_time: "13:00", boarding_point_id: boarding_point.id, trip_id: trip.id)
+ticket = Ticket.create(total_fare: 800, user_id: user.id, payment_id: payment.id, trip: trip_id.id, bus: bus_id.id, boarding_id: boarding.id)
+Seat.create(seat_code: "A1", seat_status: 0, bus_id: bus.id, ticket_id: ticket.id)
