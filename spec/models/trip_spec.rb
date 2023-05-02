@@ -13,5 +13,11 @@ RSpec.describe Trip, type: :model do
     it {
       should validate_numericality_of(:ticket_price).is_greater_than(0).is_less_than_or_equal_to(10_000)
     }
+
+    it { should belong_to(:bus).optional }
+    it { should belong_to(:route).optional }
+    it { should have_many(:tickets) }
+    it { should have_many(:boardings) }
+    it { should have_many(:boarding_points) }
   end
 end

@@ -1,7 +1,7 @@
 class Bus < ApplicationRecord
   has_many :tickets, dependent: :nullify
   has_many :seats, dependent: :nullify
-  has_many :trip, dependent: :nullify
+  has_many :trips, dependent: :nullify
 
   enum bus_type: { ac: 0, non_ac: 1 }
   validates :bus_code, :bus_company, :bus_type, :bus_capacity, presence: true

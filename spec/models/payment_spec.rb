@@ -1,5 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Payment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:payment) { FactoryBot.build(:payment) }
+  describe "when creating a Payment" do
+    it "has a valid factory" do
+      expect(payment).to be_valid
+    end
+    it { should have_one(:ticket) }
+  end
 end
