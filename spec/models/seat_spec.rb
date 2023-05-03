@@ -12,7 +12,7 @@ RSpec.describe Seat, type: :model do
     it { should_not allow_value("A 3").for(:seat_code) }
     it { should_not allow_value("").for(:seat_code) }
 
-    it { should belong_to(:bus).optional }
+    it { should belong_to(:trip).optional }
     it { should belong_to(:ticket).optional }
   end
 end

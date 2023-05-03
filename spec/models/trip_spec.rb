@@ -19,5 +19,6 @@ RSpec.describe Trip, type: :model do
     it { should have_many(:tickets) }
     it { should have_many(:boardings) }
     it { should have_many(:boarding_points) }
+    it { should have_many(:seats) }
   end
 end

@@ -16,7 +16,6 @@ RSpec.describe Bus, type: :model do
     it { should validate_numericality_of(:bus_capacity).is_greater_than(0).is_less_than_or_equal_to(60) }
 
     it { should have_many(:tickets) }
-    it { should have_many(:seats) }
     it { should have_many(:trips) }
   end
 end
