@@ -21,5 +21,5 @@ payment = Payment.create
 trip = Trip.create(ticket_price: 800, total_booked: 0, trip_date: "01-05-2023", trip_time: "13:00", bus_id: bus.id, route_id: route.id)
 boarding_point = BoardingPoint.create(boarding_point_name: "Rajarbagh")
 boarding = Boarding.create(boarding_time: "13:00", boarding_point_id: boarding_point.id, trip_id: trip.id)
-ticket = Ticket.create(total_fare: 800, user_id: user.id, payment_id: payment.id, trip: trip_id.id, bus: bus_id.id, boarding_id: boarding.id)
-Seat.create(seat_code: "A1", seat_status: 0, bus_id: bus.id, ticket_id: ticket.id)
+ticket = Ticket.create(total_fare: 800, user_id: user.id, payment_id: payment.id, trip_id: trip.id, bus_id: bus.id, boarding_id: boarding.id)
+Seat.create(seat_code: "A1", seat_status: 0, trip_id: trip.id, ticket_id: ticket.id)

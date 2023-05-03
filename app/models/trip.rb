@@ -1,6 +1,7 @@
 class Trip < ApplicationRecord
   has_many :tickets, dependent: :nullify
   belongs_to :bus, optional: true
+  has_many :seats, dependent: :nullify
   belongs_to :route, optional: true
   has_many :boardings, dependent: :nullify
   has_many :boarding_points, through: :boardings

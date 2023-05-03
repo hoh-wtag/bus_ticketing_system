@@ -1,6 +1,5 @@
 class Bus < ApplicationRecord
   has_many :tickets, dependent: :nullify
-  has_many :seats, dependent: :nullify
   has_many :trips, dependent: :nullify
 
   enum bus_type: { ac: 0, non_ac: 1 }

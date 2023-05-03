@@ -1,6 +1,6 @@
 class Seat < ApplicationRecord
   belongs_to :ticket, optional: true
-  belongs_to :bus, optional: true
+  belongs_to :trip, optional: true
 
   enum seat_status: { seat_available: 0, on_hold: 1, booked: 2 }
   validates :seat_status, presence: true
