@@ -76,8 +76,6 @@ group :test do
 end
 
 gem 'faker'
-gem 'htmlbeautifier'
-gem 'ordinare'
 gem 'phony_rails'
 gem 'rubocop'
 gem 'rubocop-rails'
