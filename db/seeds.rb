@@ -5,15 +5,6 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Route.destroy_all
-Bus.destroy_all
-User.destroy_all
-Payment.destroy_all
-Trip.destroy_all
-BoardingPoint.destroy_all
-Boarding.destroy_all
-Ticket.destroy_all
-Seat.destroy_all
 10.times do
   route = FactoryBot.create(:route)
   bus = FactoryBot.create(:bus)
