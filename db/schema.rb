@@ -15,13 +15,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
   enable_extension "plpgsql"
 
   create_table "boarding_points", force: :cascade do |t|
-    t.string "boarding_point_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "boardings", force: :cascade do |t|
-    t.time "boarding_time", null: false
+    t.time "time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "trip_id"
@@ -31,13 +31,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
   end
 
   create_table "buses", force: :cascade do |t|
-    t.string "bus_code", null: false
+    t.string "code", null: false
     t.integer "bus_type", default: 0, null: false
-    t.string "bus_company", null: false
-    t.integer "bus_capacity", default: 0, null: false
+    t.string "company", null: false
+    t.integer "capacity", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["bus_code"], name: "index_buses_on_bus_code", unique: true
+    t.index ["code"], name: "index_buses_on_code", unique: true
   end
 
   create_table "payments", force: :cascade do |t|
@@ -46,15 +46,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.string "route_source", null: false
-    t.string "route_destination", null: false
+    t.string "source", null: false
+    t.string "destination", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "seats", force: :cascade do |t|
-    t.string "seat_code", null: false
-    t.integer "seat_status", default: 0, null: false
+    t.string "code", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "ticket_id"
@@ -82,8 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
   create_table "trips", force: :cascade do |t|
     t.integer "ticket_price", null: false
     t.integer "total_booked", null: false
-    t.date "trip_date", null: false
-    t.time "trip_time", null: false
+    t.date "date", null: false
+    t.time "time", null: false
     t.bigint "bus_id"
     t.bigint "route_id"
     t.datetime "created_at", null: false
