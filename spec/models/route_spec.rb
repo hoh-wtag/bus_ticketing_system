@@ -10,8 +10,10 @@ RSpec.describe Route, type: :model do
     it { should validate_presence_of(:destination) }
     it { should allow_value("letteronly").for(:source) }
     it { should_not allow_value("123with0number").for(:source) }
+    it { should_not allow_value("").for(:source) }
     it { should allow_value("letteronly").for(:destination) }
     it { should_not allow_value("123with0number").for(:destination) }
+    it { should_not allow_value("").for(:destination) }
 
     it { should have_many(:trips) }
   end

@@ -13,6 +13,8 @@ RSpec.describe Bus, type: :model do
     it { should validate_uniqueness_of(:code).case_insensitive }
     it { should allow_value("shohagh-003").for(:code) }
     it { should_not allow_value("shogagh 001").for(:code) }
+    it { should_not allow_value("").for(:code) }
+    it { should_not allow_value("").for(:bus_type) }
     it { should validate_numericality_of(:capacity).is_greater_than(0).is_less_than_or_equal_to(60) }
 
     it { should have_many(:tickets) }

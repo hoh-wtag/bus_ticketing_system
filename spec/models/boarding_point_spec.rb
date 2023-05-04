@@ -9,5 +9,6 @@ RSpec.describe BoardingPoint, type: :model do
     it { should validate_presence_of(:name) }
     it { should allow_value("letter only").for(:name) }
     it { should_not allow_value("123with0number").for(:name) }
+    it { should_not allow_value("").for(:name) }
   end
 end
