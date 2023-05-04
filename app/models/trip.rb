@@ -8,7 +8,7 @@ class Trip < ApplicationRecord
 
   validates :ticket_price, :total_booked, :date, :time, presence: true
   validates :ticket_price, numericality: { greater_than: 0, less_than_or_equal_to: 10_000 }
-  validates :total_booked, numericality: { greater_than: 0 }
+  validates :total_booked, numericality: { greater_than_or_equal_to: 0 }
 
   after_create :create_seats
 
