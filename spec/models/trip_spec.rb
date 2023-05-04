@@ -10,9 +10,8 @@ RSpec.describe Trip, type: :model do
     it { should validate_presence_of(:total_booked) }
     it { should validate_presence_of(:trip_date) }
     it { should validate_presence_of(:trip_time) }
-    it {
-      should validate_numericality_of(:ticket_price).is_greater_than(0).is_less_than_or_equal_to(10_000)
-    }
+    it { should validate_numericality_of(:ticket_price).is_greater_than(0).is_less_than_or_equal_to(10_000) }
+    it { should validate_numericality_of(:total_booked).is_greater_than(0) }
 
     it { should belong_to(:bus).optional }
     it { should belong_to(:route).optional }
