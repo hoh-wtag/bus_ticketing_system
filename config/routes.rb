@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :routes
   resources :buses
+  resources :trips
 end

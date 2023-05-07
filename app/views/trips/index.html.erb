@@ -1,0 +1,44 @@
+<h1>All Trips</h1>
+<nav>
+  <%= link_to "Add Trips", new_trip_path%>
+</nav>
+<br>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Ticket Price</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Bus</th>
+    <th>Route</th>
+    <th colspan=2>Action</th>
+  </tr>
+  <% for trip in @trips  do%>
+    <tr>
+      <td><%=trip.id%></td>
+      <td><%=trip.ticket_price%></td>
+      <td><%=trip.date%></td>
+      <td><%=trip.time.strftime("%I:%M %P")%></td>
+      <td>
+        <% if trip.bus %>
+          <%=trip.bus.code%>
+        <%else %>
+          N/A
+        <% end %>
+      </td>
+      <td>
+        <% if trip.route %>
+          <%=trip.route.full_name%>
+        <%else %>
+          N/A
+        <% end %>
+      </td>
+      <td><%= link_to "Edit", edit_trip_path(trip) %></td>
+      <td><%= link_to "Delete", trip_path(trip),data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%>
+      </td>
+    </tr>
+  <%end%>
+</table>
