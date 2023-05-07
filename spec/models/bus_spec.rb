@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Bus, type: :model do
+RSpec.describe Bus do
   let!(:bus) { FactoryBot.create(:bus) }
   describe "when creating a bus" do
     it "has a valid factory" do

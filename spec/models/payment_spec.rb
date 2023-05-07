@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Payment, type: :model do
+RSpec.describe Payment do
   let(:payment) { FactoryBot.build(:payment) }
   describe "when creating a Payment" do
     it "has a valid factory" do

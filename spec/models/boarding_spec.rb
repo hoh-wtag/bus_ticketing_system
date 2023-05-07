@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Boarding, type: :model do
+RSpec.describe Boarding do
   let(:boarding) { FactoryBot.build(:boarding) }
   describe "when creating a boarding" do
     it "has a valid factory" do

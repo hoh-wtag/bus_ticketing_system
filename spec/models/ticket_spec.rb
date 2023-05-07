@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Ticket, type: :model do
+RSpec.describe Ticket do
   let(:ticket) { FactoryBot.build(:ticket) }
   describe "when creating a ticket" do
     it "has a valid factory" do

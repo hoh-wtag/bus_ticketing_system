@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Route, type: :model do
+RSpec.describe Route do
   let(:route) { FactoryBot.create(:route) }
   describe "when creating a route" do
     it "has a valid factory" do
