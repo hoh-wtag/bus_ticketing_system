@@ -1,0 +1,30 @@
+<h1>All Buses</h1>
+<nav>
+  <%= link_to "Add Bus", new_bus_path%>
+</nav>
+<br>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Code</th>
+    <th>Company</th>
+    <th>Type</th>
+    <th>Capacity</th>
+    <th colspan=2>Action</th>
+  </tr>
+  <% for bus in @buses  do%>
+    <tr>
+      <td><%=bus.id%></td>
+      <td><%=bus.code%></td>
+      <td><%=bus.company%></td>
+      <td><%=bus.bus_type%></td>
+      <td><%=bus.capacity%></td>
+      <td><%= link_to "Edit", edit_bus_path(bus) %></td>
+      <td><%= link_to "Delete", bus_path(bus),data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%>
+      </td>
+    </tr>
+  <%end%>
+</table>
