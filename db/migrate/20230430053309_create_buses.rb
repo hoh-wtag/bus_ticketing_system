@@ -6,7 +6,7 @@ class CreateBuses < ActiveRecord::Migration[7.0]
       t.string :company,            null: false
       t.integer :capacity,          null: false, default: 0
 
-      t.timestamps,                 null: false
+      t.timestamps
     end
 
     add_index :buses, :code,        unique: true

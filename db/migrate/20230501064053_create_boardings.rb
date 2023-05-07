@@ -3,7 +3,7 @@ class CreateBoardings < ActiveRecord::Migration[7.0]
     create_table :boardings do |t|
       t.time :time,       null: false
 
-      t.timestamps,       null: false
+      t.timestamps
     end
   end
 end

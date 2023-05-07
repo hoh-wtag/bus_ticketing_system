@@ -9,7 +9,7 @@ class CreateTickets < ActiveRecord::Migration[7.0]
       t.references :boarding,         null: true, foreign_key: true
       t.references :bus,              null: true, foreign_key: true
 
-      t.timestamps,                   null: false
+      t.timestamps
     end
   end
 end
