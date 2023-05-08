@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :routes
   resources :buses
   resources :trips
+  resources :boarding_points
   
   root to: "home#index";
   get "signup", to: "users#new";
