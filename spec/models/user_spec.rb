@@ -11,7 +11,7 @@ RSpec.describe User do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:password) }
+    it { should validate_presence_of(:password_digest) }
     it { should validate_presence_of(:phone) }
     it { should validate_presence_of(:user_name) }
     it { should validate_presence_of(:role) }
@@ -26,11 +26,11 @@ RSpec.describe User do
     it { should allow_value("+8801000000000").for(:phone) }
     it { should_not allow_value("+88010000000").for(:phone) }
     it { should_not allow_value("AbcDef").for(:phone) }
-    it { should allow_value("Aa@1bcde").for(:password) }
-    it { should_not allow_value("AbcDefaaaaaaa").for(:password) }
+    it { should allow_value("Aa@1bcde").for(:password_digest) }
+    it { should_not allow_value("AbcDefaaaaaaa").for(:password_digest) }
     it { should_not allow_value("").for(:first_name) }
     it { should_not allow_value("").for(:last_name) }
-    it { should_not allow_value("").for(:password) }
+    it { should_not allow_value("").for(:password_digest) }
     it { should_not allow_value("").for(:phone) }
     it { should_not allow_value("").for(:user_name) }
     it { should_not allow_value("").for(:role) }

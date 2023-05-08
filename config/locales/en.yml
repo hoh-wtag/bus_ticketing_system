@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  need_signup_for_access: "You need to be signed in to access that."
+  account_creation_successful: "Account created successfully"
+  successful_sign_in: "Sign in successful"
+  wrong_email_password: "Wrong email or password"
+  signed_out: "Signed out"
