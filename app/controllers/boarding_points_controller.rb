@@ -15,7 +15,7 @@ class BoardingPointsController < ApplicationController
     @boarding_point = BoardingPoint.new(boarding_point_params)
 
     if @boarding_point.save
-      redirect_to action: "index", status: :see_other
+      redirect_to action: "index", status: :created
     else
       render :new, status: :unprocessable_entity
     end
