@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Seat, type: :model do
+RSpec.describe Seat do
   let(:seat) { FactoryBot.build(:seat) }
   describe "when creating a seat" do
     it "has a valid factory" do

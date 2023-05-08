@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Trip, type: :model do
+RSpec.describe Trip do
   let(:trip) { FactoryBot.build(:trip) }
   describe "when creating a trip" do
     it "has a valid factory" do
@@ -11,7 +11,7 @@ RSpec.describe Trip, type: :model do
     it { should validate_presence_of(:date) }
     it { should validate_presence_of(:time) }
     it { should validate_numericality_of(:ticket_price).is_greater_than(0).is_less_than_or_equal_to(10_000) }
-    it { should validate_numericality_of(:total_booked).is_greater_than(0) }
+    it { should validate_numericality_of(:total_booked).is_greater_than_or_equal_to(0) }
 
     it { should belong_to(:bus).optional }
     it { should belong_to(:route).optional }
