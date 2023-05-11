@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Trips", type: :request do
+RSpec.describe "Trips" do
   describe "GET /trips" do
     it "returns a success response" do
       get "/trips"

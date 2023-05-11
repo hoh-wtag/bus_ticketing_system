@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Routes", type: :request do
+RSpec.describe "Routes" do
   describe "GET /routes" do
     it "returns a success response" do
       get "/routes"

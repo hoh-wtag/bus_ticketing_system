@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "BoardingPoints", type: :request do
+RSpec.describe "BoardingPoints" do
   describe "GET /boarding_points" do
     it "returns a success response" do
       get "/boarding_points"
