@@ -11,10 +11,17 @@ class Trip < ApplicationRecord
   validates :total_booked, numericality: { greater_than_or_equal_to: 0 }
 
   validate :check_if_present
+  validate :date_time_can_be_updated
 
   def check_if_present
     return unless new_record?
     return unless Trip.where(date:, time:, bus:).size >= 1
+
+    errors.add(:time, "#{bus.code} has exisitng trip on #{date} - #{time}")
+  end
+
+  def date_time_can_be_updated
+    return unless Trip.where(date:, time:, bus:).size == 1 && Trip.where(date:, time:, bus:)[0].id != id
 
     errors.add(:time, "#{bus.code} has exisitng trip on #{date} - #{time}")
   end

@@ -30,10 +30,6 @@
     <%= form.select :route_id,Route.all.map{|x| [x.full_name,x.id]} %>
   </div>
   <div>
-    <%= form.label :total_booked %><br>
-    <%= form.number_field :total_booked %><br>
-  </div>
-  <div>
     <%= form.submit %>
   </div>
 <% end %>

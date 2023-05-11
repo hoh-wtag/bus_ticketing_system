@@ -2,7 +2,7 @@ class CreateTrips < ActiveRecord::Migration[7.0]
   def change
     create_table :trips do |t|
       t.integer :ticket_price,      null: false
-      t.integer :total_booked,      null: false
+      t.integer :total_booked,      null: false, default: 0
       t.date :date,                 null: false
       t.time :time,                 null: false
 
