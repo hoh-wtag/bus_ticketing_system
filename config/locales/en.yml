@@ -35,3 +35,5 @@ en:
   successful_sign_in: "Sign in successful"
   wrong_email_password: "Wrong email or password"
   signed_out: "Signed out"
+  user_already_signed_in: "User has already signed in"
+  need_admin_for_access: "You need to be Admin to access that."
