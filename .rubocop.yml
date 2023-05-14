@@ -3,7 +3,6 @@ AllCops:
   
   Exclude:
     - db/migrate/**/*
-    - db/schema.rb
     - config/**/*
     - script/**/*
     - bin/**/*
@@ -12,7 +11,6 @@ AllCops:
     - app/channels/**/*
     - app/jobs/**/*
     - node_modules/**/*
-    - Gemfile
     - Rakefile
     - config.ru
 
@@ -45,7 +43,7 @@ Style/WordArray:
 # Defaults all strings to double quotes. Less performant, but
 # nicer for consistency, and for adding interpolation later.
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 # Prettier hashes.
 Layout/HashAlignment:
