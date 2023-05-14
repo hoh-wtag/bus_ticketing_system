@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_045544) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_boarding_points_on_name", unique: true
   end
 
   create_table "boardings", force: :cascade do |t|
