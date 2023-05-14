@@ -13,7 +13,10 @@
   payment = FactoryBot.create(:payment)
   trip = FactoryBot.create(:trip, bus_id: bus.id, route_id: route.id)
   boarding_point = FactoryBot.create(:boarding_point)
-  boarding = FactoryBot.create(:boarding, boarding_point_id: boarding_point.id, trip_id: trip.id)
+  boarding = FactoryBot.create(:boarding,
+                               time:              trip.time,
+                               boarding_point_id: boarding_point.id,
+                               trip_id:           trip.id)
   FactoryBot.create(:ticket,
                     user_id:     user.id,
                     payment_id:  payment.id,

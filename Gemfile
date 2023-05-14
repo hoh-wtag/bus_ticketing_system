@@ -79,5 +79,6 @@ end
 
 gem 'faker'
 gem 'phony_rails'
+gem 'pry'
 gem 'rubocop'
 gem 'rubocop-rails'
