@@ -5,6 +5,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
     user_name { Faker::Name.first_name }
     phone { Faker::Base.numerify("+8801#########") }
-    password { Faker::Internet.password(min_length: 8, max_length: 40, mix_case: true, special_characters: true) }
+    password do
+      Faker::Internet.password(min_length: 8, max_length: 40, mix_case: true, special_characters: true)
+    end
   end
 end

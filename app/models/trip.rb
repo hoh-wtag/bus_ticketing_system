@@ -15,6 +15,8 @@ class Trip < ApplicationRecord
   private
 
   def create_seats
-    (0..bus.capacity - 1).each { |a| Seat.create(code: "#{((a / 4) + 65).chr}#{(a % 4) + 1}", status: 0, trip_id: id) }
+    (0..bus.capacity - 1).each do |a|
+      Seat.create(code: "#{((a / 4) + 65).chr}#{(a % 4) + 1}", status: 0, trip_id: id)
+    end
   end
 end
