@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_502_045_544) do
 
   create_table 'trips', force: :cascade do |t|
     t.integer 'ticket_price', null: false
-    t.integer 'total_booked', null: false
+    t.integer 'total_booked', default: 0, null: false
     t.date 'date', null: false
     t.time 'time', null: false
     t.bigint 'bus_id'
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_502_045_544) do
     t.string 'last_name', null: false
     t.string 'email', null: false
     t.string 'user_name', null: false
-    t.string 'password', null: false
+    t.string 'password_digest', null: false
     t.string 'phone', null: false
     t.integer 'role', default: 0, null: false
     t.datetime 'created_at', null: false
