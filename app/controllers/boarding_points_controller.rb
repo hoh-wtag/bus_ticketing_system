@@ -15,7 +15,7 @@ class BoardingPointsController < ApplicationController
     @boarding_point = BoardingPoint.new(boarding_point_params)
 
     if @boarding_point.save
-      redirect_to action: "index", status: :created
+      redirect_to action: 'index', status: :created
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class BoardingPointsController < ApplicationController
 
   def update
     if @boarding_point.update(boarding_point_params)
-      redirect_to action: "index", status: :see_other
+      redirect_to action: 'index', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class BoardingPointsController < ApplicationController
 
   def destroy
     @boarding_point.destroy
-    redirect_to action: "index", status: :see_other
+    redirect_to action: 'index', status: :see_other
   end
 
   private

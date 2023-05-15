@@ -14,7 +14,7 @@ class BusesController < ApplicationController
   def create
     @bus = Bus.new(bus_params)
     if @bus.save
-      redirect_to action: "index", status: :created
+      redirect_to action: 'index', status: :created
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class BusesController < ApplicationController
 
   def update
     if @bus.update(bus_params)
-      redirect_to action: "index", status: :see_other
+      redirect_to action: 'index', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class BusesController < ApplicationController
 
   def destroy
     @bus.destroy
-    redirect_to action: "index", status: :see_other
+    redirect_to action: 'index', status: :see_other
   end
 
   private

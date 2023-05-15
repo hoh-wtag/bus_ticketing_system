@@ -14,7 +14,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     if @trip.save
-      redirect_to action: "index", status: :created
+      redirect_to action: 'index', status: :created
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class TripsController < ApplicationController
 
   def update
     if @trip.update(trip_params)
-      redirect_to action: "index", status: :see_other
+      redirect_to action: 'index', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class TripsController < ApplicationController
 
   def destroy
     @trip.destroy
-    redirect_to action: "index", status: :see_other
+    redirect_to action: 'index', status: :see_other
   end
 
   private
