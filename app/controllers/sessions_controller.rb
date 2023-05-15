@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user.present? && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = t(:successful_sign_in)
-      redirect_to root_path
+      redirect_to root_path, status: :see_other
     else
       flash.now[:alert] = t(:wrong_email_password)
       render :new, status: :unprocessable_entity
@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:notice] = t(:signed_out)
-    redirect_to root_path
+    redirect_to root_path, status: :see_other
   end
 end

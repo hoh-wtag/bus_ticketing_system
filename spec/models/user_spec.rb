@@ -27,10 +27,10 @@ RSpec.describe User do
     it { should_not allow_value('+88010000000').for(:phone) }
     it { should_not allow_value('AbcDef').for(:phone) }
     it { should allow_value('Aa@1bcde').for(:password) }
-    it { should_not allow_value('AbcDefaaaaaaa').for(:password) }
+    it { should_not allow_value('AbcDefaaaaaaa').for(:password_digest) }
     it { should_not allow_value('').for(:first_name) }
     it { should_not allow_value('').for(:last_name) }
-    it { should_not allow_value('').for(:password) }
+    it { should_not allow_value('').for(:password_digest) }
     it { should_not allow_value('').for(:phone) }
     it { should_not allow_value('').for(:user_name) }
     it { should_not allow_value('').for(:role) }
