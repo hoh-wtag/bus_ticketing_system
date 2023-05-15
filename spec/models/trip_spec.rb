@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Trip do
   let(:trip) { FactoryBot.build(:trip) }
-  describe "when creating a trip" do
-    it "has a valid factory" do
+  describe 'when creating a trip' do
+    it 'has a valid factory' do
       expect(trip).to be_valid
     end
     it { should validate_presence_of(:ticket_price) }
