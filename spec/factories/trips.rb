@@ -5,7 +5,7 @@ FactoryBot.define do
     date { Faker::Date.between(from: '2023-05-01', to: '2024-05-01') }
     time { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default) }
 
-    bus_id { create(:bus).id }
-    route_id { create(:route).id }
+    bus { create(:bus) }
+    route { create(:route) }
   end
 end
