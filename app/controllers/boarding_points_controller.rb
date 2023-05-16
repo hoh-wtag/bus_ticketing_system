@@ -2,7 +2,7 @@ class BoardingPointsController < ApplicationController
   before_action :find_boarding_point_by_id, only: %i[edit update destroy]
 
   def index
-    @boarding_points = BoardingPoint.all.order("id")
+    @boarding_points = BoardingPoint.all.order('id')
   end
 
   def new
