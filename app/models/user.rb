@@ -11,4 +11,14 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, format: { with: VALID_PASSWORD_REGEX }
   validates_plausible_phone :phone, presence: true
+
+  before_validation :strip_whitespace
+
+  private
+
+  def strip_whitespace
+    attributes.each do |attr, value|
+      self[attr] = value.strip if value.respond_to?(:strip)
+    end
+  end
 end

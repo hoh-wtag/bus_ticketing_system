@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_502_045_544) do
     t.string 'destination', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['source', 'destination'], name: 'index_routes_on_source_and_destination', unique: true
   end
 
   create_table 'seats', force: :cascade do |t|
