@@ -6,5 +6,6 @@ class CreateRoutes < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :routes, [:source, :destination], unique: true
   end
 end

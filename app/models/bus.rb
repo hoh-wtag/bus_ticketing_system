@@ -12,4 +12,13 @@ class Bus < ApplicationRecord
   validates :code, uniqueness: { case_sensitive: false }
 
   validates :capacity, numericality: { greater_than: 0, less_than_or_equal_to: 60 }
+  before_validation :strip_whitespace
+
+  private
+
+  def strip_whitespace
+    attributes.each do |attr, value|
+      self[attr] = value.strip if value.respond_to?(:strip)
+    end
+  end
 end
