@@ -16,6 +16,7 @@ class Seat < ApplicationRecord
   def strip_whitespace
     attributes.each do |attr, value|
       self[attr] = value.strip if value.respond_to?(:strip)
+      self[attr] = value.squeeze(' ') if value.respond_to?(:squeeze)
     end
   end
 end
