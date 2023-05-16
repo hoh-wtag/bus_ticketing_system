@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Resources
+  include WhitespaceValidation
 
   has_secure_password
   has_many :tickets, dependent: :nullify
@@ -12,15 +13,4 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password_digest, format: { with: VALID_PASSWORD_REGEX }
   validates_plausible_phone :phone, presence: true
-
-  before_validation :strip_whitespace
-
-  private
-
-  def strip_whitespace
-    attributes.each do |attr, value|
-      self[attr] = value.strip if value.respond_to?(:strip)
-      self[attr] = value.squeeze(' ') if value.respond_to?(:squeeze)
-    end
-  end
 end

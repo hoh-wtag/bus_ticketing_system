@@ -1,5 +1,6 @@
 class Route < ApplicationRecord
   include Resources
+  include WhitespaceValidation
 
   has_many :trips, dependent: :nullify
 
@@ -12,16 +13,5 @@ class Route < ApplicationRecord
 
   def full_name
     self.name = "#{source} - #{destination}"
-  end
-
-  before_validation :strip_whitespace
-
-  private
-
-  def strip_whitespace
-    attributes.each do |attr, value|
-      self[attr] = value.strip if value.respond_to?(:strip)
-      self[attr] = value.squeeze(' ') if value.respond_to?(:squeeze)
-    end
   end
 end
