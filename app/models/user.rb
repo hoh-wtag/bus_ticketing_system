@@ -11,6 +11,6 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, format: { with: VALID_NAME_REGEX }
   validates :email, :user_name, uniqueness: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password_digest, format: { with: VALID_PASSWORD_REGEX }
+  validates :password, format: { with: VALID_PASSWORD_REGEX }
   validates_plausible_phone :phone, presence: true
 end

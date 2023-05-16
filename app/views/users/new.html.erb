@@ -1,12 +1,19 @@
 <h1>Sign Up</h1>
 <%= form_with model: @user, url: signup_path do |form| %>
   <% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |message| %>
-      <div>
-        <%= message %>
-      </div>
-    <% end %>
-  <% end %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited to create account:</h2>
+      <ul>
+      <% @user.errors.each do |error| %>
+            <%unless error.attribute === :password_digest%>
+              <li>
+              <%=error.full_message%>
+              </li>
+            <% end %>
+      <%end%>
+      </ul>
+    </div>
+  <%end%>
   <div>
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
