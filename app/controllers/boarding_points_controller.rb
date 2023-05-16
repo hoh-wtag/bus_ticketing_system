@@ -1,5 +1,5 @@
 class BoardingPointsController < ApplicationController
-  before_action :show, only: %i[edit update destroy]
+  before_action :find_boarding_point_by_id, only: %i[edit update destroy]
 
   def index
     @boarding_points = BoardingPoint.all
@@ -40,7 +40,12 @@ class BoardingPointsController < ApplicationController
     params.require(:boarding_point).permit(:name)
   end
 
-  def show
-    @boarding_point = BoardingPoint.find(params[:id])
+  def find_boarding_point_by_id
+    @boarding_point = BoardingPoint.find_by(id: params[:id])
+
+    return if @boarding_point
+
+    flash[:alert] = "Boarding Point #{t(:not_found)}"
+    redirect_to action: 'index'
   end
 end

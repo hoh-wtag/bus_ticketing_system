@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :show, only: %i[edit update destroy]
+  before_action :find_trip_by_id, only: %i[edit update destroy]
 
   def index
     @trips = Trip.all
@@ -39,7 +39,11 @@ class TripsController < ApplicationController
     params.require(:trip).permit(:ticket_price, :total_booked, :date, :time, :bus_id, :route_id)
   end
 
-  def show
-    @trip = Trip.find(params[:id])
+  def find_trip_by_id
+    @trip = Trip.find_by(id: params[:id])
+    return if @trip
+
+    flash[:alert] = "Trip #{t(:not_found)}"
+    redirect_to action: 'index'
   end
 end

@@ -1,5 +1,5 @@
 class BusesController < ApplicationController
-  before_action :show, only: %i[edit update destroy]
+  before_action :find_bus_by_id, only: %i[edit update destroy]
 
   def index
     @buses = Bus.all
@@ -39,7 +39,11 @@ class BusesController < ApplicationController
     params.require(:bus).permit(:code, :bus_type, :company, :capacity)
   end
 
-  def show
-    @bus = Bus.find(params[:id])
+  def find_bus_by_id
+    @bus = Bus.find_by(id: params[:id])
+    return if @bus
+
+    flash[:alert] = "Bus #{t(:not_found)}"
+    redirect_to action: 'index'
   end
 end

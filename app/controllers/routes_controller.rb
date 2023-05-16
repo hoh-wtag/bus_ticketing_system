@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  before_action :show, only: %i[edit update destroy]
+  before_action :find_route_by_id, only: %i[edit update destroy]
 
   def index
     @routes = Route.all
@@ -40,7 +40,12 @@ class RoutesController < ApplicationController
     params.require(:route).permit(:source, :destination)
   end
 
-  def show
-    @route = Route.find(params[:id])
+  def find_route_by_id
+    @route = Route.find_by(id: params[:id])
+
+    return if @route
+
+    flash[:alert] = "Route #{t(:not_found)}"
+    redirect_to action: 'index'
   end
 end
