@@ -1,5 +1,6 @@
 class Bus < ApplicationRecord
   include Resources
+  include WhitespaceValidation
 
   has_many :tickets, dependent: :nullify
   has_many :trips, dependent: :nullify
@@ -12,14 +13,4 @@ class Bus < ApplicationRecord
   validates :code, uniqueness: { case_sensitive: false }
 
   validates :capacity, numericality: { greater_than: 0, less_than_or_equal_to: 60 }
-  before_validation :strip_whitespace
-
-  private
-
-  def strip_whitespace
-    attributes.each do |attr, value|
-      self[attr] = value.strip if value.respond_to?(:strip)
-      self[attr] = value.squeeze(' ') if value.respond_to?(:squeeze)
-    end
-  end
 end
