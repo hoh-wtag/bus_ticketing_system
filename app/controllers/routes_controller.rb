@@ -2,7 +2,7 @@ class RoutesController < ApplicationController
   before_action :find_route_by_id, only: %i[edit update destroy]
 
   def index
-    @routes = Route.all
+    @routes = Route.all.order("id")
   end
 
   def new

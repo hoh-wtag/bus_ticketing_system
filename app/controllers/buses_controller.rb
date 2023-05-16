@@ -2,7 +2,7 @@ class BusesController < ApplicationController
   before_action :find_bus_by_id, only: %i[edit update destroy]
 
   def index
-    @buses = Bus.all
+    @buses = Bus.all.order("id")
   end
 
   def new

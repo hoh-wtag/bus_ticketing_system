@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   before_action :find_trip_by_id, only: %i[edit update destroy]
 
   def index
-    @trips = Trip.all
+    @trips = Trip.all.order("id")
   end
 
   def new
