@@ -28,7 +28,7 @@
   </div>
   <div>
     <%= form.label :route %><br>
-    <%= form.select :route_id,Route.all.map{|x| [x.full_name,x.id]} %>
+    <%= form.select :route_id, Route.all.map{ |route| [route.full_name, route.id] } %>
   </div>
   <div>
     <%= form.submit %>

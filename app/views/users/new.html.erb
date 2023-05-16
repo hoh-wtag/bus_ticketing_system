@@ -4,16 +4,16 @@
     <div style="color: red">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited to create account:</h2>
       <ul>
-      <% @user.errors.each do |error| %>
-            <%unless error.attribute === :password_digest%>
-              <li>
-              <%=error.full_message%>
-              </li>
-            <% end %>
-      <%end%>
+        <% @user.errors.each do |error| %>
+          <% unless error.attribute === :password_digest %>
+            <li>
+              <%= error.full_message %>
+            </li>
+          <% end %>
+        <% end %>
       </ul>
     </div>
-  <%end%>
+  <% end %>
   <div>
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
@@ -40,7 +40,7 @@
   </div>
   <div>
     <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation  %>
+    <%= form.password_field :password_confirmation %>
   </div>
   <div>
     <%= form.submit "Create Account" %>

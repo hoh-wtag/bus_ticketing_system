@@ -23,11 +23,11 @@
   </div>
   <div>
     <%= form.label :bus %><br>
-    <%= form.select :bus_id,Bus.all.map{|x| [x.code,x.id]} %>
+    <%= form.select :bus_id, Bus.all.map{ |bus| [bus.code, bus.id] } %>
   </div>
   <div>
     <%= form.label :route %><br>
-    <%= form.select :route_id,Route.all.map{|x| [x.full_name,x.id]} %>
+    <%= form.select :route_id, Route.all.map{ |route| [route.full_name, route.id]} %>
   </div>
   <div>
     <%= form.submit %>

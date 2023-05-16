@@ -15,30 +15,30 @@
   </tr>
   <% for trip in @trips  do%>
     <tr>
-      <td><%=trip.id%></td>
-      <td><%=trip.ticket_price%></td>
-      <td><%=trip.date%></td>
-      <td><%=trip.time.strftime("%I:%M %P")%></td>
+      <td><%= trip.id %></td>
+      <td><%= trip.ticket_price %></td>
+      <td><%= trip.date %></td>
+      <td><%= trip.time.strftime("%I:%M %P") %></td>
       <td>
         <% if trip.bus %>
-          <%=trip.bus.code%>
-        <%else %>
+          <%= trip.bus.code %>
+        <% else %>
           N/A
         <% end %>
       </td>
       <td>
         <% if trip.route %>
-          <%=trip.route.full_name%>
-        <%else %>
+          <%= trip.route.full_name %>
+        <% else %>
           N/A
         <% end %>
       </td>
       <td><%= link_to "Edit", edit_trip_path(trip) %></td>
-      <td><%= link_to "Delete", trip_path(trip),data: {
+      <td><%= link_to "Delete", trip_path(trip), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   }%>
       </td>
     </tr>
-  <%end%>
+  <% end %>
 </table>

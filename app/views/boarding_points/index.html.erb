@@ -11,8 +11,8 @@
   </tr>
   <% for boarding_point in @boarding_points  do%>
     <tr>
-      <td><%=boarding_point.id%></td>
-      <td><%=boarding_point.name%></td>
+      <td><%= boarding_point.id %></td>
+      <td><%= boarding_point.name %></td>
       <td><%= link_to "Edit", edit_boarding_point_path(boarding_point) %></td>
       <td><%= link_to "Delete", boarding_point_path(boarding_point),data: {
                     turbo_method: :delete,
