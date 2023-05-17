@@ -5,11 +5,9 @@
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited to create account:</h2>
       <ul>
         <% @user.errors.each do |error| %>
-          <% unless error.attribute === :password_digest %>
-            <li>
-              <%= error.full_message %>
-            </li>
-          <% end %>
+          <li>
+            <%= error.full_message %>
+          </li>
         <% end %>
       </ul>
     </div>
