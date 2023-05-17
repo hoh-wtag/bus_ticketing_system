@@ -30,10 +30,14 @@ RSpec.describe User do
     it { should_not allow_value('AbcDefaaaaaaa').for(:password) }
     it { should_not allow_value('').for(:first_name) }
     it { should_not allow_value('').for(:last_name) }
-    it { should_not allow_value('').for(:password) }
     it { should_not allow_value('').for(:phone) }
     it { should_not allow_value('').for(:user_name) }
     it { should_not allow_value('').for(:role) }
+    it 'does not allow an empty password' do
+      user = User.new(password: '')
+      expect(user.valid?).to be false
+      expect(user.errors[:password]).to include("can't be blank")
+    end
 
     it { should have_many(:tickets) }
   end
