@@ -1,17 +1,15 @@
 class ApplicationController < ActionController::Base
-  include ApplicationHelper
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def set_current_user
-    return unless session[:user_id]
+  protected
 
-    current_user
-  end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:first_name, :last_name, :email, :user_name, :password, :phone, :password_confirmation)
+    end
 
-  def require_user_signed_in
-    redirect_to signin_path, alert: t(:need_signup_for_access) if current_user.nil?
-  end
-
-  def already_signed_in
-    redirect_to root_path, alert: t(:user_already_signed_in) unless current_user.nil?
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:first_name, :last_name, :password, :phone, :current_password)
+    end
   end
 end
