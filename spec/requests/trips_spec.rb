@@ -9,7 +9,8 @@ RSpec.describe 'Trips' do
   end
 
   describe 'POST /trips' do
-    let(:valid_params) { { trip: attributes_for(:trip) } }
+    bus = FactoryBot.create(:bus)
+    let(:valid_params) { { trip: attributes_for(:trip, bus_id: bus.id) } }
     let(:invalid_params) { { trip: attributes_for(:trip, ticket_price: '') } }
     it 'should render the new trip form' do
       get '/trips/new'
