@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = :en
+  end
+
   def set_current_user
     return unless session[:user_id]
 
