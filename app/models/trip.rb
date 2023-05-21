@@ -6,6 +6,8 @@ class Trip < ApplicationRecord
   belongs_to :bus, optional: true
   belongs_to :route, optional: true
 
+  accepts_nested_attributes_for :boardings, allow_destroy: true, reject_if: :all_blank
+
   validates :ticket_price, :total_booked, :date, :time, presence: true
   validates :ticket_price, numericality: { greater_than: 0, less_than_or_equal_to: 10_000 }
   validates :total_booked, numericality: { greater_than_or_equal_to: 0 }

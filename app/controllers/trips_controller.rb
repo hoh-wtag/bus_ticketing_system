@@ -8,6 +8,7 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    @trip.boardings.build
   end
 
   def edit; end
@@ -37,7 +38,8 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:ticket_price, :total_booked, :date, :time, :bus_id, :route_id)
+    params.require(:trip).permit(:ticket_price, :total_booked, :date, :time, :bus_id, :route_id,
+                                 boardings_attributes: %i[id time boarding_point_id _destroy])
   end
 
   def find_trip_by_id
