@@ -78,6 +78,7 @@ group :test do
 end
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'cancancan'
 gem 'devise'
 gem 'faker'
 gem 'phony_rails'

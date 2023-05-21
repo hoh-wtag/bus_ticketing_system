@@ -45,8 +45,8 @@ RSpec.describe 'Users', type: :request do
 
   describe 'POST /signin' do
     let!(:users) { create(:user, password: 'Aa@1bcde', password_confirmation: 'Aa@1bcde') }
-    let(:valid_params) {  { email: users.email, password: users.password } }
-    let(:invalid_params) {  { email: users.email, password: 'abcdefgh' } }
+    let(:valid_params) { { email: users.email, password: users.password } }
+    let(:invalid_params) { { email: users.email, password: 'abcdefgh' } }
     it 'should render the signin form' do
       get '/signin'
       expect(response).to render_template('sessions/new')

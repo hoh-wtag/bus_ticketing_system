@@ -38,3 +38,4 @@ en:
   user_already_signed_in: "User has already signed in"
   need_admin_for_access: "You need to be Admin to access that."
   not_found: ' not found'
+  access_denied: 'Access denied!'

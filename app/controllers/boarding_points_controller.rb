@@ -1,4 +1,5 @@
 class BoardingPointsController < ApplicationController
+  load_and_authorize_resource
   before_action :find_boarding_point_by_id, only: %i[edit update destroy]
 
   def index
