@@ -1,0 +1,45 @@
+<%= form_with url:search_path ,method: :get do |f| %>
+  <div>
+     <%= f.label :source %><br>
+    <%= f.select :source, options_from_collection_for_select(@sources, "source", "source", params[:source]),{prompt: "Select"},{onchange: "this.form.submit()" }%>
+  </div>
+  <div>
+    <%= f.label :destination %><br>
+      <%= f.select :destination, options_from_collection_for_select(@destinations, "destination", "destination", params[:destination]),{prompt: "Select"},{onchange: "this.form.submit()",class: 'form-control' } %>
+  </div>
+<div>
+    <%= f.label :date %><br>
+    <%= f.date_field :date,{min: Date.today , :value => Time.now.strftime(params[:date]|| Date.today.to_s) ,onchange: "this.form.submit()",class: 'form-control'}%>
+  </div>
+<% end %>
+
+<br>
+<table class="table">
+
+ <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ticket Price</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Bus</th>
+      <th>Route</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+<tbody>
+<% for trip in @trips  do%>
+<tr>
+    <td><%=trip.id%></td>
+    <td><%=trip&.ticket_price||"N/A"%></td>
+    <td><%=trip&.date||"N/A"%></td>
+    <td><%=trip&.time.strftime("%I:%M %P")||"N/A"%></td>
+    <td><%=trip&.bus&.code||"N/A"%></td>
+    <td><%=trip&.route&.full_name ||"N/A"%></td>
+    <td><%= link_to "Buy Ticket", seat_plan_path(trip) %></td>
+
+</tr>
+</tbody>
+<%end%>
+</table>
