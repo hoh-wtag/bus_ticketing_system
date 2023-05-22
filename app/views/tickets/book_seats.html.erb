@@ -1,0 +1,52 @@
+<table class="table table-bordered table-striped">
+
+ <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ticket Price</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Bus</th>
+      <th scope="col">Route</th>
+    </tr>
+  </thead>
+
+<tbody>
+</tr>
+<tr>
+    <td><%=@trip.id%></td>
+    <td><%=@trip.ticket_price%></td>
+    <td><%=@trip.date%></td>
+    <td><%=@trip.time.strftime("%I:%M %P")%></td>
+    <td><%=@trip.bus.code%></td>
+    <td><%=@trip.route.full_name%></td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<%= form_with url:payment_path ,method: :post do |f| %>
+   
+   <%= f.hidden_field :bus_id,{:value => @trip.bus.id}  %>
+   <%= f.hidden_field :trip_id,{:value => @trip.id}  %>
+   <%= f.hidden_field :route_id,{:value => @trip.route.id}  %>
+   <div>
+      <div class="row row-cols-4">
+    <%@seats.each.with_index do |seat,index|%>
+        <div>
+         <%=seat.code%><input type="checkbox" <%= seat.status != 'seat_available'? "disabled" : "" %> name=<%=seat.id%>   id=<%=seat.id%> value=<%=seat.id%>> 
+         </div>
+    <%end%>
+
+
+        <div>
+            <%= f.label :boarding %><br>
+            <%= f.select :boarding_id, options_for_select(@boardings.map { |b| ["#{b.boarding_point.name} - #{b.time.strftime('%H:%M')}", b.id] }) %>
+        </div>
+     
+   </div>
+   </div>
+   <br>
+      <%= f.submit "Book Seats" %>
+<% end %>

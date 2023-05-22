@@ -1,0 +1,38 @@
+<h1>Hello <%=@user.first_name%></h1>
+
+<h5>Tickets</h5>
+<hr>
+
+<table>
+
+ <thead>
+    <tr>
+      <th>#</th>
+      <th>Trip Date</th>
+      <th>Trip Time</th>
+      <th>Route</th>
+      <th>Bus</th>
+      <th>Seats</th>
+      <th>Price</th>
+      <th>Boarding Point</th>
+      <th >Total Price</th>
+
+    </tr>
+  </thead>
+
+<tbody>
+<% for ticket in @tickets  do%>
+    <tr>
+        <td><%=ticket&.id || "N/A"%></td>
+        <td><%=ticket&.trip&.date || "N/A"%></td>
+        <td><%=ticket&.trip&.time&.strftime("%I:%M%p") || "N/A"%></td>
+        <td><%=ticket&.trip&.route&.full_name || "N/A"%></td>
+        <td><%=ticket&.trip&.bus&.code || "N/A"%></td>
+        <td><%=ticket&.seats.map {|seat| seat&.code } || "N/A"%></td>
+        <td><%=ticket&.trip&.ticket_price || "N/A"%></td>
+        <td><%=ticket&.boarding.boarding_point.name || "N/A"%></td>
+        <td><%=ticket&.total_fare%></td>
+    </tr>
+<% end %>
+</tbody>
+</table>

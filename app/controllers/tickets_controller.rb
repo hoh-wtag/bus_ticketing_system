@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
     @trips = @trip || []
   end
 
-  def seat_plan
+  def book_seats
     @trip = Trip.find_by(id: params[:id])
 
     if @trip.bus.nil?
@@ -16,19 +16,21 @@ class TicketsController < ApplicationController
       return redirect_to action: 'index', status: :see_other
     end
     @bus = Bus.find_by(id: @trip.bus.id)
-    @seats = Seat.where(trip: @trip, bus: @bus).order(id: :asc)
+    @seats = Seat.where(trip: @trip).order(id: :asc)
+    @boardings = Boarding.where(trip: @trip).order(id: :asc)
   end
 
   def confirm_payment
     @seats = session[:seats]
     @trip = Trip.find_by(id: session[:trip])
+    @boarding = Boarding.find_by(id: session[:boarding])
     @payment = Payment.create
     @total = @seats.size * @trip.ticket_price
-    @ticket = Ticket.new(total_fare: @total, user: current_user, payment: @payment, trip: @trip,
+    @ticket = Ticket.new(total_fare: @total, user: current_user, payment: @payment, trip: @trip, boarding: @boarding,
                          bus: @trip.bus)
 
     for i in @seats
-      next unless @trip.bus.seats.find_by(id: i).booked == true
+      next unless @trip.seats.find_by(id: i).status != 'seat_available'
 
       flash[:alert] = 'Booking Failed'
       return redirect_to action: 'index', status: :see_other
@@ -36,7 +38,7 @@ class TicketsController < ApplicationController
     end
     if @ticket.save
       for i in @seats
-        @trip.bus.seats.find_by(id: i).update(booked: true, ticket: @ticket)
+        @trip.seats.find_by(id: i).update(status: 'booked', ticket: @ticket)
       end
       flash[:notice] = 'Succesfully Booked'
       @trip.update(total_booked: @trip.total_booked + @seats.size)
@@ -52,11 +54,12 @@ class TicketsController < ApplicationController
   def process_payment
     @seats = session[:seats]
     @trip = Trip.find_by(id: session[:trip])
+    @boarding = Boarding.find_by(id: session[:boarding])
     @total = @trip.ticket_price * session[:seats].size
     return unless @total == 0
 
     flash[:alert] = 'Select atleast 1 seat'
-    redirect_to seat_plan_path(@trip), status: :see_other
+    redirect_to book_seats_path(@trip), status: :see_other
   end
 
   def payment
@@ -67,6 +70,7 @@ class TicketsController < ApplicationController
     @seat_session = session[:seats] || []
     session[:seats] = @seats
     session[:trip] = params[:trip_id]
+    session[:boarding] = params[:boarding_id]
     redirect_to process_payment_path, status: :see_other
   end
 

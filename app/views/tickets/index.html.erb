@@ -37,7 +37,7 @@
     <td><%=trip&.time.strftime("%I:%M %P")||"N/A"%></td>
     <td><%=trip&.bus&.code||"N/A"%></td>
     <td><%=trip&.route&.full_name ||"N/A"%></td>
-    <td><%= link_to "Buy Ticket", seat_plan_path(trip) %></td>
+    <td><%= link_to "Buy Ticket", book_seats_path(trip) %></td>
 
 </tr>
 </tbody>
