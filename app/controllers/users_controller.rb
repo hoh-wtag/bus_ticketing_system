@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = t(:account_creation_successful)
+      flash[:notice] = I18n.t('sign_up.account_creation_successful')
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -19,7 +19,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :user_name, :phone, :email, :password,
+    params.require(:user).permit(:first_name,
+                                 :last_name,
+                                 :user_name,
+                                 :phone,
+                                 :email,
+                                 :password,
                                  :password_confirmation)
   end
 end

@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user_signed_in
-    redirect_to signin_path, alert: t(:need_signup_for_access) if current_user.nil?
+    redirect_to signin_path, alert: I18n.t('access.need_signup_for_access') if current_user.nil?
   end
 
   def already_signed_in
-    redirect_to root_path, alert: t(:user_already_signed_in) unless current_user.nil?
+    redirect_to root_path, alert: I18n.t('access.user_already_signed_in') unless current_user.nil?
   end
 end

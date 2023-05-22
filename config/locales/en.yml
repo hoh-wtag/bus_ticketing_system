@@ -30,11 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  need_signup_for_access: "You need to be signed in to access that."
-  account_creation_successful: "Account created successfully"
-  successful_sign_in: "Sign in successful"
-  wrong_email_password: "Wrong email or password"
-  signed_out: "Signed out"
-  user_already_signed_in: "User has already signed in"
-  need_admin_for_access: "You need to be Admin to access that."
-  not_found: ' not found'
+  sign_up:
+    account_creation_successful: "Account created successfully"
+  sign_in:
+    successful_sign_in: "Sign in successful"
+    wrong_email_password: "Wrong email or password"
+  sign_out:
+    signed_out: "Signed out"
+  access:
+    user_already_signed_in: "User has already signed in"
+    need_admin_for_access: "You need to be Admin to access that"
+    need_signup_for_access: "You need to be signed in to access that"
+  not_found:
+    bus_not_found: "Bus not found"
+    trip_not_found: "Trip not found"
+    boarding_point_not_found: "Boarding Point not found"
+    route_not_found: "Route not found"

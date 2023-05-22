@@ -45,7 +45,7 @@ class RoutesController < ApplicationController
 
     return if @route
 
-    flash[:alert] = "Route #{t(:not_found)}"
+    flash[:alert] = I18n.t('not_found.route_not_found')
     redirect_to action: 'index'
   end
 end

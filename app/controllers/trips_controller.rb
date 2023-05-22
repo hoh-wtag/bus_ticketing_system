@@ -36,14 +36,18 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:ticket_price, :total_booked, :date, :time, :bus_id, :route_id)
+    params.require(:trip).permit(:ticket_price,
+                                 :total_booked,
+                                 :date, :time,
+                                 :bus_id,
+                                 :route_id)
   end
 
   def find_trip_by_id
     @trip = Trip.find_by(id: params[:id])
     return if @trip
 
-    flash[:alert] = "Trip #{t(:not_found)}"
+    flash[:alert] = I18n.t('not_found.trip_not_found')
     redirect_to action: 'index'
   end
 end
