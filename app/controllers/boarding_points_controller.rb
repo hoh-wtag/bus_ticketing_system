@@ -46,7 +46,7 @@ class BoardingPointsController < ApplicationController
 
     return if @boarding_point
 
-    flash[:alert] = "Boarding Point #{t(:not_found)}"
+    flash[:alert] = I18n.t('not_found.boarding_point_not_found')
     redirect_to action: 'index'
   end
 end

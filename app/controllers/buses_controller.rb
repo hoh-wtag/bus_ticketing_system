@@ -44,7 +44,7 @@ class BusesController < ApplicationController
     @bus = Bus.find_by(id: params[:id])
     return if @bus
 
-    flash[:alert] = "Bus #{t(:not_found)}"
+    flash[:alert] = I18n.t('not_found.bus_not_found')
     redirect_to action: 'index'
   end
 end
