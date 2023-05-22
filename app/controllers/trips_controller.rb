@@ -42,7 +42,7 @@ class TripsController < ApplicationController
                                  :total_booked,
                                  :date, :time,
                                  :bus_id,
-                                 :route_id
+                                 :route_id,
                                  boardings_attributes: %i[id time boarding_point_id _destroy])
   end
 
