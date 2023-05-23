@@ -3,7 +3,7 @@ class RoutesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @routes = Route.all.order(sort_column)
+    @routes = Route.all.order('id')
   end
 
   def new
@@ -36,24 +36,6 @@ class RoutesController < ApplicationController
   end
 
   private
-
-  def sort_column
-    default_column = 'id'
-    default_direction = 'asc'
-
-    sortable_columns = ['id', 'source', 'destination']
-    sortable_directions = %w[asc desc]
-
-    sort_column = params[:sort_column].in?(sortable_columns) ? params[:sort_column] : default_column
-
-    sort_direction = if params[:sort_direction].in?(sortable_directions)
-                       params[:sort_direction]
-                     else
-                       default_direction
-                     end
-
-    "#{sort_column} #{sort_direction}"
-  end
 
   def route_params
     params.require(:route).permit(:source, :destination)

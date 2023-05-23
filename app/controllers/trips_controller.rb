@@ -3,7 +3,7 @@ class TripsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @trips = Trip.all.order(sort_column)
+    @trips = Trip.all.order('id')
   end
 
   def new
@@ -36,24 +36,6 @@ class TripsController < ApplicationController
   end
 
   private
-
-  def sort_column
-    default_column = 'id'
-    default_direction = 'asc'
-
-    sortable_columns = ['id', 'ticket_price', 'date', 'time']
-    sortable_directions = %w[asc desc]
-
-    sort_column = params[:sort_column].in?(sortable_columns) ? params[:sort_column] : default_column
-
-    sort_direction = if params[:sort_direction].in?(sortable_directions)
-                       params[:sort_direction]
-                     else
-                       default_direction
-                     end
-
-    "#{sort_column} #{sort_direction}"
-  end
 
   def trip_params
     params.require(:trip).permit(:ticket_price,
