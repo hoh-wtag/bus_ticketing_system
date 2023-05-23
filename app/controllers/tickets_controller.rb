@@ -80,23 +80,9 @@ class TicketsController < ApplicationController
   def find_dependency
     @source = Route.find_by(id: params[:source].presence)
     @destination = Route.where(source: params[:source].presence)
-    default_column = 'id'
-    default_direction = 'asc'
-
-    sortable_columns = ['id', 'time']
-    sortable_directions = %w[asc desc]
-
-    sort_column = params[:sort_column].in?(sortable_columns) ? params[:sort_column] : default_column
-
-    sort_direction = if params[:sort_direction].in?(sortable_directions)
-                       params[:sort_direction]
-                     else
-                       default_direction
-                     end
     @trip = Trip.where(date:  params[:date].presence,
                        route: Route.find_by(source:      params[:source].presence,
                                             destination: params[:destination].presence))
-                .order("#{sort_column} #{sort_direction}")
   end
 
   def booking_failed?
