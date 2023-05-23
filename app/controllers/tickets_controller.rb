@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   before_action :authenticate_user!, only: %i[process_payment confirm_payment]
 
   def index
-    @sources = Route.select('DISTINCT ON (source) *')
+    @sources = Route.distinct(:source)
     @destinations = @destination || []
     @trips = @trip || []
   end
@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
     @trip = Trip.find_by(id: params[:id])
 
     if @trip.bus.nil?
-      flash[:alert] = 'Bus Not Available'
+      flash[:alert] = I18n.t('not_found.bus_not_found')
       return redirect_to action: 'index', status: :see_other
     end
     @bus = Bus.find_by(id: @trip.bus.id)
@@ -26,29 +26,24 @@ class TicketsController < ApplicationController
     @boarding = Boarding.find_by(id: session[:boarding])
     @payment = Payment.create
     @total = @seats.size * @trip.ticket_price
-    @ticket = Ticket.new(total_fare: @total, user: current_user, payment: @payment, trip: @trip, boarding: @boarding,
-                         bus: @trip.bus)
+    @ticket = Ticket.new(total_fare: @total,
+                         user:       current_user,
+                         payment:    @payment,
+                         trip:       @trip,
+                         boarding:   @boarding,
+                         bus:        @trip.bus)
 
-    for i in @seats
-      next unless @trip.seats.find_by(id: i).status != 'seat_available'
+    return redirect_booking_failed if booking_failed?
 
-      flash[:alert] = 'Booking Failed'
-      return redirect_to action: 'index', status: :see_other
-
-    end
     if @ticket.save
-      for i in @seats
-        @trip.seats.find_by(id: i).update(status: 'booked', ticket: @ticket)
-      end
-      flash[:notice] = 'Succesfully Booked'
+      update_seat_status
+      flash[:notice] = I18n.t('booking.success')
       @trip.update(total_booked: @trip.total_booked + @seats.size)
-
-      redirect_to action: 'index', status: :see_other
     else
-
-      flash[:alert] = 'Booking Failed'
-      redirect_to action: 'index', status: :see_other
+      flash[:alert] = I18n.t('booking.failed')
     end
+
+    redirect_to root_path, status: :see_other
   end
 
   def process_payment
@@ -56,9 +51,15 @@ class TicketsController < ApplicationController
     @trip = Trip.find_by(id: session[:trip])
     @boarding = Boarding.find_by(id: session[:boarding])
     @total = @trip.ticket_price * session[:seats].size
-    return unless @total == 0
 
-    flash[:alert] = 'Select atleast 1 seat'
+    return redirect_process_failed if process_failed?
+
+    @seats.each do |seat_id|
+      @trip.seats.find_by(id: seat_id).update(status: 'on_hold', ticket: @ticket)
+    end
+    return unless @total.zero?
+
+    flash[:alert] = I18n.t('booking.select_minimum_seat')
     redirect_to book_seats_path(@trip), status: :see_other
   end
 
@@ -82,5 +83,29 @@ class TicketsController < ApplicationController
     @trip = Trip.where(date:  params[:date].presence,
                        route: Route.find_by(source:      params[:source].presence,
                                             destination: params[:destination].presence))
+  end
+
+  def booking_failed?
+    @seats.any? { |seat_id| @trip.seats.find_by(id: seat_id).status != 'on_hold' }
+  end
+
+  def process_failed?
+    @seats.any? { |seat_id| @trip.seats.find_by(id: seat_id).status != 'seat_available' }
+  end
+
+  def redirect_booking_failed
+    flash[:alert] = I18n.t('booking.failed')
+    redirect_to(action: 'index', status: :see_other)
+  end
+
+  def redirect_process_failed
+    flash[:alert] = I18n.t('booking.select_again')
+    redirect_to(action: 'index', status: :see_other)
+  end
+
+  def update_seat_status
+    @seats.each do |seat_id|
+      @trip.seats.find_by(id: seat_id).update(status: 'booked', ticket: @ticket)
+    end
   end
 end
