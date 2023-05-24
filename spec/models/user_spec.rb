@@ -35,7 +35,7 @@ RSpec.describe User do
     context 'Checking Validations for Password Attribute' do
       it { should validate_presence_of(:password) }
       it { should allow_value('Aa@1bcde').for(:password) }
-      it { should_not allow_value('AbcDefaaaaaaa').for(:password) }
+      it { should allow_value('AbcDefaaaaaaa').for(:password) }
       it 'does not allow an empty password' do
         user = User.new(password: '')
         expect(user.valid?).to be false

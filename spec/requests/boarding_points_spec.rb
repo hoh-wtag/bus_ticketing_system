@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'BoardingPoints' do
+  let(:user) { create :user }
+  before(:each) do
+    user.role = :admin
+    sign_in(user)
+  end
   describe 'GET /boarding_points' do
     it 'returns a success response' do
       get '/boarding_points'

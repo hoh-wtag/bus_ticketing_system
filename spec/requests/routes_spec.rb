@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Routes' do
+  let(:user) { create :user }
+  before(:each) do
+    user.role = :admin
+    sign_in(user)
+  end
   describe 'GET /routes' do
     it 'returns a success response' do
       get '/routes'
