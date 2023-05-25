@@ -4,7 +4,6 @@
 <hr>
 
 <table>
-
  <thead>
     <tr>
       <th>#</th>
@@ -16,13 +15,12 @@
       <th>Price</th>
       <th>Boarding Point</th>
       <th >Total Price</th>
-
     </tr>
   </thead>
 
-<tbody>
-<% for ticket in @tickets  do%>
-    <tr>
+  <tbody>
+    <% for ticket in @tickets  do%>
+      <tr>
         <td><%=ticket&.id || "N/A"%></td>
         <td><%=ticket&.trip&.date || "N/A"%></td>
         <td><%=ticket&.trip&.time&.strftime("%I:%M%p") || "N/A"%></td>
@@ -32,7 +30,7 @@
         <td><%=ticket&.trip&.ticket_price || "N/A"%></td>
         <td><%=ticket&.boarding.boarding_point.name || "N/A"%></td>
         <td><%=ticket&.total_fare%></td>
-    </tr>
-<% end %>
-</tbody>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
