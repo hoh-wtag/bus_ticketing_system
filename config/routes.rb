@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :trips
   resources :boarding_points
 
+  mount Ticketing::Api => '/'
+
   get 'search', to: 'tickets#index', as: 'search'
   get 'book_seats/:id', to: 'tickets#book_seats', as: 'book_seats'
   post 'payment', to: 'tickets#payment', as: 'payment'
