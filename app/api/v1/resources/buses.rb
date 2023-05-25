@@ -1,16 +1,18 @@
-module Ticketing
-  module V1
+module V1
+  module Resources
     class Buses < Grape::API
       resources :buses do
         desc 'Get all Bus'
         get do
-          Bus.all
+          bus = Bus.all
+          present bus, with: V1::Entities::Buses
         end
 
         desc 'Get Bus by id'
         route_param :id do
           get do
-            Bus.find_by(id: params[:id])
+            bus = Bus.find_by(id: params[:id])
+            present bus, with: V1::Entities::Buses
           end
         end
 
@@ -24,7 +26,9 @@ module Ticketing
 
         post do
           @bus = Bus.new(params)
-          return { 'error': @bus.errors } unless @bus.save
+
+          return { error: @bus.errors } unless @bus.save
+
           return @bus
         end
 
@@ -33,7 +37,9 @@ module Ticketing
         route_param :id do
           put do
             @bus = Bus.find(params[:id])
-            return { 'error': @bus.errors } unless @bus.update(params)
+
+            return { error: @bus.errors } unless @bus.update(params)
+
             @bus
           end
         end
