@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user_by_id, only: %i[edit update]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[edit update dashboard]
   def index
     return unless session[:user_id]
 
