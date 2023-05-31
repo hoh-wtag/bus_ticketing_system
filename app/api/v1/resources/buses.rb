@@ -36,9 +36,6 @@ module V1
         route_param :id do
           put do
             @bus = Bus.find(params[:id])
-            
-            binding.pry
-            
 
             return { error: @bus.errors } unless @bus.update(params)
 
