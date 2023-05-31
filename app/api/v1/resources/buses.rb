@@ -4,15 +4,15 @@ module V1
       resources :buses do
         desc 'Get all Bus'
         get do
-          bus = Bus.all
-          present bus, with: V1::Entities::Buses
+          @bus = Bus.all
+          present @bus, with: V1::Entities::Buses
         end
 
         desc 'Get Bus by id'
         route_param :id do
           get do
-            bus = Bus.find_by(id: params[:id])
-            present bus, with: V1::Entities::Buses
+            @bus = Bus.find_by(id: params[:id])
+            present @bus, with: V1::Entities::Buses
           end
         end
 
@@ -29,7 +29,7 @@ module V1
 
           return { error: @bus.errors } unless @bus.save
 
-          return @bus
+          present @bus, with: V1::Entities::Buses
         end
 
         desc 'update a Bus'
@@ -40,7 +40,7 @@ module V1
 
             return { error: @bus.errors } unless @bus.update(params)
 
-            @bus
+            present @bus, with: V1::Entities::Buses
           end
         end
 
@@ -48,6 +48,7 @@ module V1
         route_param :id do
           delete do
             Bus.find(params[:id]).destroy
+            present @bus, with: V1::Entities::Buses
           end
         end
       end
