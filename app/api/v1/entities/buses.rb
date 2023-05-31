@@ -4,6 +4,8 @@ module V1
       expose :id
       expose :code
       expose :company
+      expose :bus_type
+      expose :capacity
     end
   end
 end

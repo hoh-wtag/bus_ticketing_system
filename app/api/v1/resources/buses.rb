@@ -19,24 +19,26 @@ module V1
         desc 'Create a Bus'
         params do
           requires :code, type: String
-          requires :typed, type: Integer
+          requires :bus_type, type: Integer
           requires :company, type: String
           requires :capacity, type: Integer
         end
 
         post do
           @bus = Bus.new(params)
-
           return { error: @bus.errors } unless @bus.save
 
           present @bus, with: V1::Entities::Buses
         end
 
-        desc 'update a Bus'
+        desc 'Update Bus by id'
 
         route_param :id do
           put do
             @bus = Bus.find(params[:id])
+            
+            binding.pry
+            
 
             return { error: @bus.errors } unless @bus.update(params)
 
@@ -44,7 +46,7 @@ module V1
           end
         end
 
-        desc 'delete a Bus'
+        desc 'Delete Bus by id'
         route_param :id do
           delete do
             Bus.find(params[:id]).destroy
