@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  def index
+    return unless session[:user_id]
+
+    @user = User.find_by(id: session[:user_id])
+  end
+
   def new
     already_signed_in
     @user = User.new
