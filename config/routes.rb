@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  root to: 'users#index'
   devise_for :users
   devise_scope :user do
     get ':user/profile', to: 'devise/registrations#edit', as: :edit_user_profile
