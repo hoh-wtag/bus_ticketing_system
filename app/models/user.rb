@@ -4,6 +4,15 @@ class User < ApplicationRecord
   include WhitespaceValidation
 
   has_many :tickets, dependent: :nullify
+  has_many :access_grants,
+           class_name:  'Doorkeeper::AccessGrant',
+           foreign_key: :resource_owner_id,
+           dependent:   :delete_all
+
+  has_many :access_tokens,
+           class_name:  'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent:   :delete_all
 
   USER_ROLE = { customer: 0, admin: 1 }.freeze
   enum role: USER_ROLE

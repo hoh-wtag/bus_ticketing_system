@@ -1,6 +1,13 @@
+require 'doorkeeper/grape/helpers'
 module V1
   module Resources
     class Buses < Grape::API
+      helpers Doorkeeper::Grape::Helpers
+
+      before do
+        doorkeeper_authorize!
+      end
+
       resources :buses do
         desc 'Get all Bus'
         get do

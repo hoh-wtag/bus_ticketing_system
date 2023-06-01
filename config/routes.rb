@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get ':user/profile', to: 'devise/registrations#edit', as: :edit_user_profile
   end
+  use_doorkeeper
 
   resources :routes
   resources :buses
