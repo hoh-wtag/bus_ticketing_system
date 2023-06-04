@@ -22,5 +22,8 @@ module BusTicketingSystem
     config.generators do |g|
       g.test_framework = :rspec
     end
+
+    config.i18n.available_locales = [ :en, :es ]
+    config.i18n.fallbacks = true
   end
 end

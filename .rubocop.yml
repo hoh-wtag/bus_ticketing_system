@@ -3,7 +3,6 @@ AllCops:
   
   Exclude:
     - db/migrate/**/*
-    - config/**/*
     - script/**/*
     - bin/**/*
     - test/**/*
@@ -67,3 +66,6 @@ Metrics/BlockLength:
   Exclude:
     - db/schema.rb
   Max: 100
+
+Metrics/AbcSize:
+  Enabled: false

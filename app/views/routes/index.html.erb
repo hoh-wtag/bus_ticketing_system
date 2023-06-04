@@ -1,0 +1,26 @@
+<h1>All Routes</h1>
+<nav>
+  <%= link_to "Add Route", new_route_path %>
+</nav>
+<br>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Source</th>
+    <th>Destination</th>
+    <th colspan=2>Action</th>
+  </tr>
+  <% for route in @routes  do%>
+    <tr>
+      <td><%= route.id %></td>
+      <td><%= route.source %></td>
+      <td><%= route.destination %></td>
+      <td><%= link_to "Edit", edit_route_path(route) %></td>
+      <td><%= link_to "Delete", route_path(route), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%>
+      </td>
+    </tr>
+  <%end%>
+</table>

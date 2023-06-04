@@ -1,0 +1,24 @@
+<h1>All Boarding Points</h1>
+<nav>
+  <%= link_to "Add Boarding Point", new_boarding_point_path%>
+</nav>
+<br>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th colspan=2>Action</th>
+  </tr>
+  <% for boarding_point in @boarding_points  do%>
+    <tr>
+      <td><%= boarding_point.id %></td>
+      <td><%= boarding_point.name %></td>
+      <td><%= link_to "Edit", edit_boarding_point_path(boarding_point) %></td>
+      <td><%= link_to "Delete", boarding_point_path(boarding_point),data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%>
+      </td>
+    </tr>
+  <%end%>
+</table>

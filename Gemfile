@@ -77,8 +77,10 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'phony_rails'
 gem 'pry'
+gem 'rails-controller-testing'
 gem 'rubocop'
 gem 'rubocop-rails'

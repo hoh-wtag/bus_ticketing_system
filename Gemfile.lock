@@ -69,6 +69,7 @@ GEM
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -174,6 +175,10 @@ GEM
       activesupport (= 7.0.4.3)
       bundler (>= 1.15.0)
       railties (= 7.0.4.3)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -243,7 +248,6 @@ GEM
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
-    timeliness (0.4.5)
     timeout (0.3.2)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -252,8 +256,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
-    validates_timeliness (5.0.1)
-      timeliness (>= 0.3.10, < 1)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -275,6 +277,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
@@ -288,6 +291,7 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rails-controller-testing
   rspec-rails
   rubocop
   rubocop-rails
@@ -297,7 +301,6 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  validates_timeliness
   web-console
   webdrivers
 

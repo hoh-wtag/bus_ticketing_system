@@ -1,0 +1,5 @@
+<h1>Home Page</h1>
+<% if current_user %>
+  Hello <%= current_user.email %>
+  <%= button_to "Sign out", signout_path, method: :delete %>
+<% end %>

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Resources
   include WhitespaceValidation
 
+  has_secure_password
   has_many :tickets, dependent: :nullify
 
   USER_ROLE = { customer: 0, admin: 1 }.freeze
