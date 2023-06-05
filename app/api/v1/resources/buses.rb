@@ -8,6 +8,11 @@ module V1
         doorkeeper_authorize!
       end
 
+      before do
+        @current_user ||= User.find(doorkeeper_token[:resource_owner_id])
+        error!('401 Unauthorized', 401) unless @current_user.admin?
+      end
+
       resources :buses do
         desc 'Get all Bus'
         get do
