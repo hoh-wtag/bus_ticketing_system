@@ -21,4 +21,9 @@ class User < ApplicationRecord
   validates :email, :user_name, uniqueness: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates_plausible_phone :phone, presence: true
+
+  def self.authenticate(email, password)
+    user = User.find_for_authentication(email:)
+    user&.valid_password?(password) ? user : nil
+  end
 end
