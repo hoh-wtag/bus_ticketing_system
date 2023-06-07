@@ -1,0 +1,45 @@
+<table>
+  <tbody>
+    <tr>
+      <th>Number Of Seats</th>
+      <td><%=@seats.size%></td>
+    </tr>
+    <tr>
+      <th>Ticket Price</th>
+      <td><%=@trip.ticket_price%></td>
+    </tr>
+    <tr>
+      <th>Boarding Point</th>
+      <td><%=@boarding.boarding_point.name%></td>
+    </tr>
+    <tr>
+      <th>Boarding Time</th>
+      <td><%=@boarding.time.strftime('%H:%M')%></td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td><%=@total%></td>
+    </tr>
+  </tbody>
+</table>
+  
+<%= form_with url:confirm_payment_path ,method: :post do |f| %>
+  <div>
+      <%= f.label :Card_Number %><br>
+      <%= f.number_field :number %>
+  </div>
+  
+  <div>
+      <%= f.label :CVC %><br>
+      <%= f.number_field :cvc %>
+    </div>
+  <div>
+      <%= f.label :expiry_date %><br>
+      <%= f.date_field :expiry_date %>
+  </div>
+  
+  <div>
+      <br>
+      <%= f.submit "Pay" %>
+  </div>
+<%end%>

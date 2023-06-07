@@ -1,23 +1,25 @@
 class ApplicationController < ActionController::Base
-  include ApplicationHelper
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
 
   def set_locale
     I18n.locale = :en
   end
 
-  def set_current_user
-    return unless session[:user_id]
-
-    current_user
+  rescue_from CanCan::AccessDenied do
+    flash[:error] = t(:access_denied)
+    redirect_to root_path
   end
 
-  def require_user_signed_in
-    redirect_to signin_path, alert: I18n.t('access.need_signup_for_access') if current_user.nil?
-  end
+  protected
 
-  def already_signed_in
-    redirect_to root_path, alert: I18n.t('access.user_already_signed_in') unless current_user.nil?
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
+      u.permit(:first_name, :last_name, :email, :user_name, :password, :phone, :password_confirmation)
+    end
+
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:first_name, :last_name, :user_name, :password, :password_confirmation, :email, :phone, :current_password)
+    end
   end
 end

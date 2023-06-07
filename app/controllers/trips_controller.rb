@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :find_trip_by_id, only: %i[edit update destroy]
+  load_and_authorize_resource
 
   def index
     @trips = Trip.all.order('id')
@@ -7,6 +8,7 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    @trip.boardings.build
   end
 
   def edit; end
@@ -40,7 +42,8 @@ class TripsController < ApplicationController
                                  :total_booked,
                                  :date, :time,
                                  :bus_id,
-                                 :route_id)
+                                 :route_id,
+                                 boardings_attributes: %i[id time boarding_point_id _destroy])
   end
 
   def find_trip_by_id

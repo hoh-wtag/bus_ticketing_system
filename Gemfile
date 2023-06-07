@@ -78,9 +78,13 @@ group :test do
 end
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'cancancan'
+gem 'cocoon'
+gem 'devise'
 gem 'faker'
 gem 'phony_rails'
 gem 'pry'
 gem 'rails-controller-testing'
 gem 'rubocop'
+gem 'jquery-rails'
 gem 'rubocop-rails'

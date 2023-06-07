@@ -1,5 +1,15 @@
-<h1>Home Page</h1>
+<h1>Home</h1>
 <% if current_user %>
-  Hello <%= current_user.email %>
-  <%= button_to "Sign out", signout_path, method: :delete %>
+    <%= link_to "SignOut", destroy_user_session_path, data:{ "turbo-method": :delete } %>
+    <br>
+    <% if current_user.role == 'admin' %>
+        <%= link_to "Buses", buses_path %>
+        <%= link_to "Trips", trips_path %>
+        <%= link_to "Routes", routes_path %>
+        <%= link_to "Boarding Points", boarding_points_path %>
+    <% end %>
+<% else %>
+    <%= link_to 'Sign up', new_user_registration_path %>
+    <%= link_to 'Sign in', new_user_session_path %>
 <% end %>
+<%= link_to "Book Ticket", search_path %>

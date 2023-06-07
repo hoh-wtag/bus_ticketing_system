@@ -15,3 +15,8 @@ en:
     trip_not_found: "Trip not found"
     boarding_point_not_found: "Boarding Point not found"
     route_not_found: "Route not found"
+  booking:
+    success: "Successfully Booked"
+    failed: "Booking Failed"
+    select_minimum_seat: "Select atleast 1 seat"
+    select_again: "Select seats again"

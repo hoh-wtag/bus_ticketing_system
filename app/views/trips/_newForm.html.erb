@@ -29,6 +29,14 @@
     <%= form.label :route %><br>
     <%= form.select :route_id, Route.all.map{ |route| [route.full_name, route.id]} %>
   </div>
+  <% # Render boardings fields %>
+  <h3>Boardings:</h3>
+  <%= form.fields_for :boardings do |boarding_form| %>
+    <%= render 'boarding_fields', f: boarding_form %>
+  <% end %>
+  <div class="wrapper">
+    <%= link_to_add_association 'Add Boarding', form, :boardings %>
+  </div>
   <div>
     <%= form.submit %>
   </div>

@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
   before_action :find_route_by_id, only: %i[edit update destroy]
+  load_and_authorize_resource
 
   def index
     @routes = Route.all.order('id')
