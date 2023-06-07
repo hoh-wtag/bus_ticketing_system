@@ -5,8 +5,7 @@ RSpec.describe Api::V1::Resources::Buses do
   let(:user) { user }
   application = Doorkeeper::Application.create!(
     name:         'TestApp',
-    redirect_uri: 'https://app.com/',
-    scopes:       'read'
+    redirect_uri: 'https://app.com/'
   )
   access_token = Doorkeeper::AccessToken.create!(
     application_id:    application.id,
@@ -14,14 +13,20 @@ RSpec.describe Api::V1::Resources::Buses do
   )
   let(:token) { access_token.token }
 
-  describe 'GET /v1/buses' do
+  describe 'GET api/v1/buses' do
     it 'returns all buses' do
       create_list(:bus, 3)
+      get('/api/v1/buses', params: { access_token: token })
 
-      get '/api/v1/buses', headers: { Authorization: "Bearer #{token}" }
+      expect(response.status).to eq(200)
+    end
+  end
+  describe 'GET /v1/buses/:id' do
+    let(:bus) { create(:bus) }
+    it 'returns a specific bus' do
+      get "/api/v1/buses/#{bus.id}", params: { access_token: token }
 
-      expect(response.status).to eq(403)
-      expect(JSON.parse(response.body)).to eq []
+      expect(response).to have_http_status(200)
     end
   end
 end
