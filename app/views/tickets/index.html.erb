@@ -45,6 +45,9 @@
       <div class="column is-one-third">
         <b>Bus Code: </b><%=trip&.bus&.code||"N/A"%>
       </div>
+      <div class="column is-one-third">
+        <b>Bus Type: </b><%=trip&.bus&.bus_type||"N/A"%>
+      </div>
       <div class="column">
         <b>Route:</b> <%=trip&.route&.full_name ||"N/A"%>
       </div>
@@ -71,5 +74,6 @@
     
   </div>
 </div>
+<br>
 
 <%end%>
