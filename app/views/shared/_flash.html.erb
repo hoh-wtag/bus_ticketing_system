@@ -1,15 +1,15 @@
 <% if flash[:success] %>
-  <div>
+  <div class="card notification is-success">
     <%= flash[:success] %>
   </div>
 <% end %>
 <% if flash[:alert] %>
-  <div>
+  <div class="card notification is-info">
     <%= flash[:alert] %>
   </div>
 <% end %>
 <% if flash[:notice] %>
-  <div>
+  <div class="card notification is-info">
     <%= flash[:notice] %>
   </div>
 <% end %>

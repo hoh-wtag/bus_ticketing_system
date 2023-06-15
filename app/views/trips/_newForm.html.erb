@@ -1,6 +1,6 @@
 <%= form_with model: @trip do |form| %>
   <% if @trip.errors.any? %>
-    <div style="color: red">
+    <div class="card notification is-danger">
       <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this Trip from being saved:</h2>
       <ul>
         <% @trip.errors.each do |error| %>
@@ -29,14 +29,17 @@
     <%= form.label :route %><br>
     <%= form.select :route_id, Route.all.map{ |route| [route.full_name, route.id]} %>
   </div>
+  <br>
   <% # Render boardings fields %>
-  <h3>Boardings:</h3>
+  <h3>Boardings:</h3><br>
   <%= form.fields_for :boardings do |boarding_form| %>
     <%= render 'boarding_fields', f: boarding_form %>
   <% end %>
+  <br>
   <div class="wrapper">
     <%= link_to_add_association 'Add Boarding', form, :boardings %>
   </div>
+  <br>
   <div>
     <%= form.submit %>
   </div>

@@ -1,6 +1,6 @@
 <%= form_with model: @bus do |form| %>
   <% if @bus.errors.any? %>
-    <div style="color: red">
+    <div class="card notification is-danger">
       <h2><%= pluralize(@bus.errors.count, "error") %> prohibited this Bus from being saved:</h2>
       <ul>
         <% @bus.errors.each do |error| %>

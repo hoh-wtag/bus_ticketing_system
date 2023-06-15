@@ -13,7 +13,7 @@
             <%= f.select :destination, options_from_collection_for_select(@destinations, "destination", "destination", params[:destination]),{prompt: "Select"},{onchange: "this.form.submit()",class: 'form-control' } %>
           </div>     
                
-          <div class="select is-multiple column">
+          <div class="is-multiple column">
             <%= f.label :date, class: "label"  %>
             <%= f.date_field :date,{min: Date.today , :value => Time.now.strftime(params[:date]|| Date.today.to_s) ,onchange: "this.form.submit()",class: 'form-control'}%>
           </div>  

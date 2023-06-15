@@ -1,6 +1,6 @@
 <%= form_with model: @boarding_point do |form| %>
   <% if @boarding_point.errors.any? %>
-    <div style="color: red">
+    <div class="card notification is-danger">
       <h2><%= pluralize(@boarding_point.errors.count, "error") %> prohibited this Boarding Point from being saved:</h2>
       <ul>
         <% @boarding_point.errors.each do |error| %>

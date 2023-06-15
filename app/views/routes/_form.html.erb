@@ -1,6 +1,6 @@
 <%= form_with model: @route do |form| %>
   <% if @route.errors.any? %>
-    <div style="color: red">
+    <div class="card notification is-danger">
       <h2><%= pluralize(@route.errors.count, "error") %> prohibited this Route from being saved:</h2>
       <ul>
         <% @route.errors.each do |error| %>
