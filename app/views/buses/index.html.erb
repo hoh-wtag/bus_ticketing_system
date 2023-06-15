@@ -5,11 +5,11 @@
 <br>
 <table border="1">
   <tr>
-    <th>ID</th>
-    <th>Code</th>
-    <th>Company</th>
-    <th>Type</th>
-    <th>Capacity</th>
+    <th><%= sortable_column_header 'ID', 'id' %></th>
+    <th><%= sortable_column_header 'Code', 'code' %></th>
+    <th><%= sortable_column_header 'Company', 'company' %></th>
+    <th><%= sortable_column_header 'Type', 'bus_type' %></th>
+    <th><%= sortable_column_header 'Capacity', 'capacity' %></th>
     <th colspan=2>Action</th>
   </tr>
   <% for bus in @buses  do%>

@@ -3,7 +3,7 @@ class BoardingPointsController < ApplicationController
   before_action :find_boarding_point_by_id, only: %i[edit update destroy]
 
   def index
-    @boarding_points = BoardingPoint.all.order('id')
+    @boarding_points = BoardingPoint.all.order(sort_column)
   end
 
   def new
@@ -36,6 +36,24 @@ class BoardingPointsController < ApplicationController
   end
 
   private
+
+  def sort_column
+    default_column = 'id'
+    default_direction = 'asc'
+
+    sortable_columns = ['id', 'name']
+    sortable_directions = %w[asc desc]
+
+    sort_column = params[:sort_column].in?(sortable_columns) ? params[:sort_column] : default_column
+
+    sort_direction = if params[:sort_direction].in?(sortable_directions)
+                       params[:sort_direction]
+                     else
+                       default_direction
+                     end
+
+    "#{sort_column} #{sort_direction}"
+  end
 
   def boarding_point_params
     params.require(:boarding_point).permit(:name)
