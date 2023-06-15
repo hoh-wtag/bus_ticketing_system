@@ -1,36 +1,54 @@
-<h1>Hello <%=@user.first_name%></h1>
+<h1 class="has-text-centered is-size-3">Hello <%=@user.first_name%></h1>
 
-<h5>Tickets</h5>
-<hr>
+<h5> Your Tickets</h5>
+<br>
 
-<table>
- <thead>
-    <tr>
-      <th>#</th>
-      <th>Trip Date</th>
-      <th>Trip Time</th>
-      <th>Route</th>
-      <th>Bus</th>
-      <th>Seats</th>
-      <th>Price</th>
-      <th>Boarding Point</th>
-      <th >Total Price</th>
-    </tr>
-  </thead>
+<% for ticket in @tickets  do%>
+<div class="card">
+  <div class="card-content">
+    <div class="columns">
+      <div class="column">
+          <b>Ticket ID: </b> <%=ticket&.id || "N/A"%>
+      </div>
+      <div class="column"> 
+        Date: <%=ticket&.trip&.date || "N/A"%>
+      </div>
+      <div class="column"> 
+        <b>Time: <%=ticket&.trip&.time&.strftime("%I:%M%p") || "N/A"%></b>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-one-third">
+        <b>Bus Code: </b><td><%=ticket&.trip&.bus&.code || "N/A"%></td>
+      </div>
+      <div class="column">
+        <b>Route:</b> <%=ticket&.trip&.route&.full_name || "N/A"%>
+      </div>
+    </div>
+    <div class="columns">
+    <div class="column is-one-third">
+      <b>Boarding Point : </b>
+      <%=ticket&.boarding.boarding_point.name || "N/A"%>
+    </div>
 
-  <tbody>
-    <% for ticket in @tickets  do%>
-      <tr>
-        <td><%=ticket&.id || "N/A"%></td>
-        <td><%=ticket&.trip&.date || "N/A"%></td>
-        <td><%=ticket&.trip&.time&.strftime("%I:%M%p") || "N/A"%></td>
-        <td><%=ticket&.trip&.route&.full_name || "N/A"%></td>
-        <td><%=ticket&.trip&.bus&.code || "N/A"%></td>
-        <td><%=ticket&.seats.map {|seat| seat&.code } || "N/A"%></td>
-        <td><%=ticket&.trip&.ticket_price || "N/A"%></td>
-        <td><%=ticket&.boarding.boarding_point.name || "N/A"%></td>
-        <td><%=ticket&.total_fare%></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div class="column">
+      <b>Seats : </b>
+      <%=ticket&.seats.map {|seat| seat&.code } || "N/A"%>
+    </div>
+    </div>
+
+    <div class="columns">
+    <div class="column">
+    <b>Total Fare: <%=ticket&.total_fare%></td></b>
+    </div>
+    
+    </div>
+    
+    
+    
+    
+  </div>
+</div>
+<br>
+
+<%end%>
