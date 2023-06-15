@@ -1,45 +1,75 @@
-<%= form_with url:search_path ,method: :get do |f| %>
-  <div>
-     <%= f.label :source %><br>
-    <%= f.select :source, options_from_collection_for_select(@sources, "source", "source", params[:source]),{prompt: "Select"},{onchange: "this.form.submit()" }%>
+<div class="card has-background-grey-lighter	">
+  <div class="card-content">
+    <div class="content">
+      <%= form_with url:search_path ,method: :get do |f| %>
+        <div class="field is-grouped is-grouped-multiline columns">
+          <div class="select is-multiple column">
+            <%= f.label :source, class: "label" %>
+            <%= f.select :source, options_from_collection_for_select(@sources, "source", "source", params[:source]),{prompt: "Select"},{onchange: "this.form.submit()" }%>
+          </div>
+
+          <div class="select is-multiple column">
+            <%= f.label :destination, class: "label" %>
+            <%= f.select :destination, options_from_collection_for_select(@destinations, "destination", "destination", params[:destination]),{prompt: "Select"},{onchange: "this.form.submit()",class: 'form-control' } %>
+          </div>     
+               
+          <div class="select is-multiple column">
+            <%= f.label :date, class: "label"  %>
+            <%= f.date_field :date,{min: Date.today , :value => Time.now.strftime(params[:date]|| Date.today.to_s) ,onchange: "this.form.submit()",class: 'form-control'}%>
+          </div>  
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div>
-    <%= f.label :destination %><br>
-      <%= f.select :destination, options_from_collection_for_select(@destinations, "destination", "destination", params[:destination]),{prompt: "Select"},{onchange: "this.form.submit()",class: 'form-control' } %>
-  </div>
-<div>
-    <%= f.label :date %><br>
-    <%= f.date_field :date,{min: Date.today , :value => Time.now.strftime(params[:date]|| Date.today.to_s) ,onchange: "this.form.submit()",class: 'form-control'}%>
-  </div>
-<% end %>
+</div>
+
 
 <br>
-<table class="table">
 
- <thead>
-    <tr>
-      <th>ID</th>
-      <th>Ticket Price</th>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Bus</th>
-      <th>Route</th>
-      <th>Action</th>
-    </tr>
-  </thead>
 
-<tbody>
 <% for trip in @trips  do%>
-<tr>
-    <td><%=trip.id%></td>
-    <td><%=trip&.ticket_price||"N/A"%></td>
-    <td><%=trip&.date||"N/A"%></td>
-    <td><%=trip&.time.strftime("%I:%M %P")||"N/A"%></td>
-    <td><%=trip&.bus&.code||"N/A"%></td>
-    <td><%=trip&.route&.full_name ||"N/A"%></td>
-    <td><%= link_to "Buy Ticket", book_seats_path(trip) %></td>
+<div class="card">
+  <div class="card-content">
+    <div class="columns">
+      <div class="column">
+          <b>ID: </b> <%=trip.id%>
+      </div>
+      <div class="column"> 
+        Date: <%=trip&.date||"N/A"%>
+      </div>
+      <div class="column"> 
+        <b>Time: <%=trip&.time.strftime("%I:%M %P")||"N/A"%></b>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-one-third">
+        <b>Bus Code: </b><%=trip&.bus&.code||"N/A"%>
+      </div>
+      <div class="column">
+        <b>Route:</b> <%=trip&.route&.full_name ||"N/A"%>
+      </div>
+    </div>
+    <div class="columns">
+    <div class="column">
+      <b>Boarding Points : </b>
+      <% for boarding in trip&.boardings  do%>
+      <%= boarding.boarding_point.name %> ,
+      <%end%>
+    </div>
+    </div>
 
-</tr>
-</tbody>
+    <div class="columns">
+    <div class="column">
+    <b>Ticket Price: <%=trip&.ticket_price||"N/A"%></b>
+    </div>
+    <div class="column has-text-right"><%= link_to "Buy Ticket", book_seats_path(trip), class: "button is-primary" %></div>
+    
+    </div>
+    
+    
+    
+    
+  </div>
+</div>
+
 <%end%>
-</table>
