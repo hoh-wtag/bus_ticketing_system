@@ -4,11 +4,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     get ':user/profile', to: 'devise/registrations#edit', as: :edit_user_profile
   end
+  use_doorkeeper
 
   resources :routes
   resources :buses
   resources :trips
   resources :boarding_points
+
+  mount Api => '/'
 
   get 'search', to: 'tickets#index', as: 'search'
   get 'book_seats/:id', to: 'tickets#book_seats', as: 'book_seats'
